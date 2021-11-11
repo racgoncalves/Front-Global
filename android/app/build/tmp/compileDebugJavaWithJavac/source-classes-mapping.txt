@@ -1,0 +1,14 @@
+com/vytal/BuildConfig.java
+ com.vytal.BuildConfig
+com/vytal/MainActivity.java
+ com.vytal.MainActivity
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
+com/vytal/ReactNativeFlipper.java
+ com.vytal.ReactNativeFlipper
+ com.vytal.ReactNativeFlipper$1
+ com.vytal.ReactNativeFlipper$2
+ com.vytal.ReactNativeFlipper$2$1
+com/vytal/MainApplication.java
+ com.vytal.MainApplication
+ com.vytal.MainApplication$1

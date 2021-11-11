@@ -1,0 +1,6 @@
+module Pods_vytal {
+  umbrella header "Pods-vytal-umbrella.h"
+
+  export *
+  module * { export * }
+}

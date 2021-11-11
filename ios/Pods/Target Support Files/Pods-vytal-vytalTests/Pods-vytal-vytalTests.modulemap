@@ -1,0 +1,6 @@
+module Pods_vytal_vytalTests {
+  umbrella header "Pods-vytal-vytalTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
