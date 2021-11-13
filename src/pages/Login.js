@@ -8,7 +8,7 @@ import CustomInput from '../components/CustomInput';
 
 
 export default function Login({ route, navigation }) {
-    const isMarket = route.params.type == 'market' ? true : false;
+    const type = route.params.type;
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [warning, setWarning] = useState(undefined);
@@ -65,7 +65,7 @@ export default function Login({ route, navigation }) {
                 <View style={styles.noAccountContainer}>
                     <Text style={styles.noAccount}>Não tem conta?</Text>
                     <TouchableOpacity>
-                        <Text style={styles.registerNow} onPress={() => navigation.navigate('ChooseAccountType')}>Cadastre-se agora!</Text>
+                        <Text style={styles.registerNow} onPress={() => navigation.navigate('Registration', { 'type': type })}>Cadastre-se agora!</Text>
                     </TouchableOpacity>
                 </View>
             </View>

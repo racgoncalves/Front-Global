@@ -9,31 +9,34 @@ export default function Market({ route, navigation }) {
     const marketObject = route.params.marketObject;
     const [products, setProducts] = useState([]);
     const [refreshing, setRefreshing] = React.useState(false);
+
+    const wait = (timeout) => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    }
  
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
     }, []);
 
+    async function getProductsItems() {
+        const getProductsContent = await getProducts(marketObject.id);
+
+        if (getProductsContent.status == 404){
+            setProducts([]);
+        } else{
+            setProducts(getProductsContent);
+        }
+    }
+
     useEffect(() => {
         if (typeof window != undefined) {
-            async function getProductsItems() {
-                const getProductsContent = await getProducts(marketObject.id);
-
-                if (getProductsContent.status == 404){
-                    setProducts([]);
-                } else{
-                    setProducts(getProductsContent);
-                }
-                
-
-            }
 
             getProductsItems();
 
         }
 
-    }, []);
+    }, [refreshing]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -55,21 +58,31 @@ export default function Market({ route, navigation }) {
                             products != undefined && products.length >= 0
                                 ?
                                 <FlatList
-                                    refreshControl={
-                                        <RefreshControl
-                                            refreshing={refreshing}
-                                            onRefresh={onRefresh}
-                                        />
-                                    }
+                                    refreshControl={<RefreshControl 
+                                        refreshing={refreshing} 
+                                        onRefresh={onRefresh}
+                                    />}
                                     style={styles.list}
                                     data={products}
                                     renderItem={({ item }) => {
                                         return (
-                                            <View style={[styles.productRow, styles.shadow]}>
-                                                {/* adicionar brand */}
-                                                <Text>Nome: <Text style={styles.productName}>{item.name}</Text></Text>
-                                                <Text>Local: <Text style={styles.productName}>{item.location}</Text></Text>
-                                            </View>
+                                            <>
+                                            {
+                                                item.donating
+                                                ?
+                                                <View style={[styles.productRow, styles.shadow]}>
+                                                    <View style={ styles.column }>
+                                                        <Text><Text style={ styles.textBold }>Nome:</Text> {item.name}</Text>
+                                                        <Text><Text style={ styles.textBold }>Marca:</Text> {item.brand}</Text>
+                                                    </View>
+                                                    <View style={ styles.column }>
+                                                        <Text><Text style={ styles.textBold }>Local:</Text> {item.location}</Text>
+                                                    </View>
+                                                </View>
+                                                :
+                                                null
+                                            }
+                                            </>
                                         );
                                     }}
                                 />
@@ -140,7 +153,6 @@ const styles = StyleSheet.create({
     },
     productRow: {
         width: '100%',
-        height: 40,
         backgroundColor: '#9FD7DD',
         borderRadius: 3,
         marginBottom: 10,
@@ -154,6 +166,12 @@ const styles = StyleSheet.create({
     },
     productName: {
         fontSize: 13,
+        fontWeight: 'bold'
+    },
+    column: {
+        flexDirection: 'column'
+    },
+    textBold: {
         fontWeight: 'bold'
     }
 });

@@ -1,13 +1,12 @@
-export const postMarket = async (marketObject) => {
+export const getProduct = async (productId) => {
     try {
         const res = await fetch(
-            'http://ec2-54-233-173-244.sa-east-1.compute.amazonaws.com:8083/mercado',
+            'http://ec2-54-233-173-244.sa-east-1.compute.amazonaws.com:8083/produto/' + productId,
             {
-                body: JSON.stringify(marketObject),
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                method: 'POST'
+                method: 'GET'
             }
         );
     
@@ -19,4 +18,3 @@ export const postMarket = async (marketObject) => {
     }
 
 }
-

@@ -8,7 +8,8 @@ import { postUser } from '../api/postUser';
 
 
 export default function Registration({ route, navigation }) {
-    const isMarket = route.params.type == 'market' ? true : false;
+    const type = route.params.type;
+    const isMarket = type == 'market' ? true : false;
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -85,7 +86,7 @@ export default function Registration({ route, navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <CustomHeader navigation={navigation} pageRedirect="ChooseAccountType" headerText="Registro de Usuário" />
+            <CustomHeader navigation={navigation} redirectObject={type} pageRedirect="Login" headerText={`Cadastro de ${isMarket ? `mercado` : `usuário`}`} />
             <ScrollView>
                 <View style={styles.mainContainer}>
                     <CustomInput placeholderText={`Nome do ${isMarket ? `mercado` : `usuário`}`} handleSetState={setName} iconType={isMarket ? "shopping-store" : "person"} isPassword={false} />

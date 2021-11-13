@@ -9,10 +9,10 @@ export default function Button(props) {
             <TouchableOpacity style={[styles.button, styles.shadow]} onPress={() => props.handleExecuteFunction()}>
                 {
                     props.isLoginLoading
-                        ?
-                        <SmallLoading />
-                        :
-                        <Text style={styles.buttonText}>{props.buttonText}</Text>
+                    ?
+                    <SmallLoading />
+                    :
+                    <Text style={styles.buttonText}>{props.buttonText}</Text>
                 }
             </TouchableOpacity>
         </View>

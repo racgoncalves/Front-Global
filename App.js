@@ -3,12 +3,12 @@ import { View, Text, SafeAreaView, Image, StyleSheet, TextInput, TouchableOpacit
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../vytal/src/pages/Login';
-import ChooseAccountType from '../vytal/src/pages/ChooseAccountType';
 import Home from './src/pages/Home';
 import Registration from './src/pages/Registration';
 import Market from './src/pages/Market';
 import Products from './src/pages/Products';
 import ChooseLogin from './src/pages/ChooseLogin';
+import RegisterProduct from './src/pages/RegisterProduct';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,11 +20,11 @@ export default function App() {
       }}>
         <Stack.Screen name="ChooseLogin" component={ChooseLogin} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="ChooseAccountType" component={ChooseAccountType} />
         <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Market" component={Market} />
         <Stack.Screen name="Products" component={Products} />
+        <Stack.Screen name="RegisterProduct" component={RegisterProduct} />
       </Stack.Navigator>
     </NavigationContainer>
   );

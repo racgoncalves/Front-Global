@@ -10,7 +10,6 @@ export default function CustomCard({picture, name, navigation, marketObject}) {
             </View>
             <View style={styles.marketInfo}>
                 <Text style={styles.marketName}>{name}</Text>
-                {/* <Text>A 5kms de distância</Text> */}
             </View>
         </TouchableOpacity>
     )

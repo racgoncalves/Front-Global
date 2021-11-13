@@ -7,7 +7,7 @@ import { getMarkets } from '../api/getMarkets';
 import SmallLoading from '../components/SmallLoading';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { getProducts } from '../api/getProducts';
-
+import { deleteProduct } from '../api/deleteProduct';
 
 export default function Products({ route, navigation }) {
     const marketObject = route.params.marketObject;
@@ -28,14 +28,27 @@ export default function Products({ route, navigation }) {
 
         }
 
-    }, []);
+    }, [products]);
+
+    async function handleDelete(productId) {
+        const deleteProductContent = await deleteProduct(productId);
+
+        if (deleteProductContent == 200) {
+            let productsTemp = products.filter(function(product){ 
+                return product.id != productId;
+            })
+
+            setProducts(productsTemp)
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
             <CustomHeader navigation={navigation} headerText="Meus Produtos" />
             <View style={styles.mainContent}>
                 <View style={styles.buttonContent}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => 
+                        navigation.navigate('RegisterProduct', { 'marketObject': marketObject })}>
                         <Text style={styles.buttonText}>+ Adicionar Novo Produto</Text>
                     </TouchableOpacity>
                 </View>
@@ -60,10 +73,10 @@ export default function Products({ route, navigation }) {
                                                 </View>
                                             </View>
                                             <View style={styles.iconsContainer}>
-                                                <TouchableOpacity>
+                                                <TouchableOpacity onPress={() => navigation.navigate('RegisterProduct', { 'marketObject': marketObject, 'isEdit': true, 'productObject': item }) }>
                                                     <Icon name="pencil" size={30} style={styles.icon} />
                                                 </TouchableOpacity>
-                                                <TouchableOpacity>
+                                                <TouchableOpacity onPress={() => handleDelete(item.id) }>
                                                     <Icon name="trash" size={30} style={styles.icon} />
                                                 </TouchableOpacity>
                                             </View>
@@ -122,7 +135,7 @@ const styles = StyleSheet.create({
     productsContent: {
         flex: 4,
         width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     productsCard: {
         width: '85%',
@@ -132,7 +145,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 3,
         padding: 15,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     productInfo: {
         width: '70%',

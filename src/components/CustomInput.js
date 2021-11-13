@@ -7,8 +7,20 @@ export default function CustomInput(props) {
 
     return (
         <View style={styles.inputContainer}>
-            <TextInput style={styles.shadow} placeholder={props.placeholderText} style={[styles.input, styles.shadow]} onChangeText={(text) => props.handleSetState(text)} secureTextEntry={props.isPassword} />
-            <Icon name={props.iconType} size={30} style={styles.icon} />
+            <TextInput 
+                style={styles.shadow} 
+                value={props.inputValue}
+                placeholder={props.placeholderText} 
+                style={[styles.input, styles.shadow]} 
+                onChangeText={(text) => props.handleSetState(text)} secureTextEntry={props.isPassword} />
+            {
+                "iconType" in props
+                ?
+                <Icon name={props.iconType} size={30} style={styles.icon} />
+                :
+                null
+            }
+            
         </View>
     )
 }

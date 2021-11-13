@@ -11,7 +11,17 @@ export default function CustomHeader(props) {
                 'pageRedirect' in props
                     ?
                     <TouchableOpacity>
-                        <Icon name="arrow-left" size={30} style={styles.icon} onPress={() => props.navigation.navigate(props.pageRedirect)} />
+                        <Icon 
+                            name="arrow-left" 
+                            size={30} 
+                            style={styles.icon} 
+                            onPress={() => 
+                                'redirectObject' in props 
+                                ? 
+                                props.navigation.navigate(props.pageRedirect, { 'marketObject': props.redirectObject }) 
+                                : 
+                                props.navigation.navigate(props.pageRedirect)} 
+                        />
                     </TouchableOpacity>
                     :
                     null
