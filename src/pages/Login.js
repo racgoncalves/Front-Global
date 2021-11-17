@@ -8,7 +8,7 @@ import CustomInput from '../components/CustomInput';
 
 
 export default function Login({ route, navigation }) {
-    const type = route.params.type;
+    const type = route.params.type !== undefined ? route.params.type : route.params.marketObject;
     const isMarket = type == 'market';
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
