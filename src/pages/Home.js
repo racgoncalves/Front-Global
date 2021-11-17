@@ -26,7 +26,7 @@ export default function Home({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <CustomHeader navigation={navigation} headerText="Mercados doando perto de você" />
+            <CustomHeader navigation={navigation} headerText="Mercados que doam perto de você" />
             <View style={styles.mainContent}>
                 {
                     markets != undefined && markets.length > 0
